@@ -1,9 +1,10 @@
-Heroku buildpack: Python
+Heroku buildpack: Python with SWIG
 ========================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/).
+SWIG install based on work done by Guy Bowden https://github.com/guybowden/heroku-buildpack-python-paybox but updated to use a more recent Python Buildpack
 
-[![Build Status](https://secure.travis-ci.org/heroku/heroku-buildpack-python.png?branch=master)](http://travis-ci.org/heroku/heroku-buildpack-python)
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/) with an additional install for SWIG which provides M2Crypto support.
+
 
 Usage
 -----
@@ -11,29 +12,32 @@ Usage
 Example usage:
 
     $ ls
-    Procfile  requirements.txt  web.py
+    Procfile  requirements.txt  runtime.txt
 
-    $ heroku create --stack cedar --buildpack git://github.com/heroku/heroku-buildpack-python.git
+    $ heroku create --stack cedar --buildpack git://github.com/huxley/heroku-buildpack-SWIG-python.git
 
     $ git push heroku master
     ...
     -----> Fetching custom git buildpack... done
     -----> Python app detected
-    -----> No runtime.txt provided; assuming python-2.7.3.
-    -----> Preparing Python runtime (python-2.7.3)
-    -----> Installing Distribute (0.6.34)
-    -----> Installing Pip (1.2.1)
+    -----> Fetching and installing SWIG 2
+    -----> Installing ...
+            SWIG installed
+            updating path...
+            /app/.heroku/python/bin:/app/.heroku/vendor/bin::/usr/local/bin::/tmp/codon/vendor/bin:/usr/ruby1.9.2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/tmp/buildpack_489c0f89-3651-40e4-b537-0659d557cb7d/vendor/bpwatch:/app/.paybox/swig/bin/
+            setting SWIG_LIB environment var
+    -----> Preparing Python runtime (python-2.7.4)
+    -----> Installing Distribute (0.6.36)
+    -----> Installing Pip (1.3.1)
     -----> Installing dependencies using Pip (1.2.1)
-           Downloading/unpacking Flask==0.7.2 (from -r requirements.txt (line 1))
-           Downloading/unpacking Werkzeug>=0.6.1 (from Flask==0.7.2->-r requirements.txt (line 1))
-           Downloading/unpacking Jinja2>=2.4 (from Flask==0.7.2->-r requirements.txt (line 1))
-           Installing collected packages: Flask, Werkzeug, Jinja2
-           Successfully installed Flask Werkzeug Jinja2
+
+            ... yadda yadda ...
+           
            Cleaning up...
 
 You can also add it to upcoming builds of an existing application:
 
-    $ heroku config:add BUILDPACK_URL=git://github.com/heroku/heroku-buildpack-python.git
+    $ heroku config:add BUILDPACK_URL=git://github.com/huxley/heroku-buildpack-SWIG-python.git
 
 The buildpack will detect your app as Python if it has the file `requirements.txt` in the root. 
 
