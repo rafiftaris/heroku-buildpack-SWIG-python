@@ -1,7 +1,7 @@
 Heroku buildpack: Python with SWIG
 ========================
 
-SWIG install based on work done by Guy Bowden https://github.com/guybowden/heroku-buildpack-python-paybox but updated to use a more recent Python Buildpack (currently v32)
+SWIG install based on work done by Guy Bowden https://github.com/guybowden/heroku-buildpack-python-paybox but updated to use a more recent Python Buildpack (currently v51)
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/) with an additional install for SWIG which provides M2Crypto support.
 
@@ -14,12 +14,16 @@ Example usage:
     $ ls
     Procfile  requirements.txt  runtime.txt
 
+<<<<<<< HEAD
     $ heroku create --stack cedar --buildpack git://github.com/huxley/heroku-buildpack-SWIG-python.git
+=======
+    $ heroku create --buildpack git://github.com/heroku/heroku-buildpack-python.git
+>>>>>>> upstream/master
 
     $ git push heroku master
     ...
-    -----> Fetching custom git buildpack... done
     -----> Python app detected
+<<<<<<< HEAD
     -----> Fetching and installing SWIG 2
     -----> Installing ...
             SWIG installed
@@ -33,15 +37,24 @@ Example usage:
 
             ... yadda yadda ...
            
+=======
+    -----> Installing runtime (python-2.7.8)
+    -----> Installing dependencies using pip
+           Downloading/unpacking requests (from -r requirements.txt (line 1))
+           Installing collected packages: requests
+           Successfully installed requests
+>>>>>>> upstream/master
            Cleaning up...
+    -----> Discovering process types
+           Procfile declares types -> (none)
 
 You can also add it to upcoming builds of an existing application:
 
     $ heroku config:add BUILDPACK_URL=git://github.com/huxley/heroku-buildpack-SWIG-python.git
 
-The buildpack will detect your app as Python if it has the file `requirements.txt` in the root. 
+The buildpack will detect your app as Python if it has the file `requirements.txt` in the root.
 
-It will use Pip to install your dependencies, vendoring a copy of the Python runtime into your slug. 
+It will use Pip to install your dependencies, vendoring a copy of the Python runtime into your slug.
 
 Specify a Runtime
 -----------------
@@ -49,10 +62,12 @@ Specify a Runtime
 You can also provide arbitrary releases Python with a `runtime.txt` file.
 
     $ cat runtime.txt
-    python-3.3.2
-    
+    python-3.4.1
+
 Runtime options include:
 
-- python-2.7.4
-- python-3.3.2
+- python-2.7.8
+- python-3.4.1
 - pypy-1.9 (experimental)
+
+Other [unsupported runtimes](https://github.com/heroku/heroku-buildpack-python/tree/master/builds/runtimes) are available as well.
