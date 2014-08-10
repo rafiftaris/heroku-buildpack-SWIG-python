@@ -1,7 +1,7 @@
 Heroku buildpack: Python with SWIG
 ========================
 
-SWIG install based on work done by Guy Bowden https://github.com/guybowden/heroku-buildpack-python-paybox but updated to use a more recent Python Buildpack (currently v32)
+SWIG install based on work done by Guy Bowden https://github.com/guybowden/heroku-buildpack-python-paybox but updated to use a more recent Python Buildpack (currently v51)
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/) with an additional install for SWIG which provides M2Crypto support.
 
@@ -50,6 +50,6 @@ You can also provide arbitrary releases Python with a `runtime.txt` file.
     
 Runtime options include:
 
-- python-2.7.4
+- python-2.7.8
 - python-3.3.2
 - pypy-1.9 (experimental)
